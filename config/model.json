@@ -1,15 +1,24 @@
 {
   "model-schema": [
-    {"name": "GENDER", "type": "string"},
-    {"name": "AGE", "type": "integer"},
-    {"name": "MARITAL_STATUS", "type": "string"},
-    {"name": "PROFESSION", "type": "string"}
+      {"name": "CUST_ID" , "type" : "integer"},
+      {"name": "SEX" , "type" : "string"},
+      {"name": "AGE" , "type" : "integer"},
+      {"name": "EDUCATION" , "type" : "integer"},
+      {"name": "INVESTMENT" , "type" : "integer"},
+      {"name": "INCOME" , "type" : "integer"},
+      {"name": "ACTIVITY" , "type" : "integer"},
+      {"name": "YRLY_AMT" , "type" : "decimal(31,6)"},
+      {"name": "AVG_DAILY_TX" , "type" : "decimal(31,6)"},
+      {"name": "YRLY_TX" , "type" : "integer"},
+      {"name": "AVG_TX_AMT" , "type" : "decimal(31,6)"},
+      {"name": "NEGTWEETS" , "type" : "integer"},
+      {"name": "STATE" , "type" : "string"},
+      {"name": "EDUCATION_GROUP" , "type" : "string"},
+      {"name": "TWITTERID" , "type" : "long"},
+      {"name": "CHURN_LABEL" , "type" : "string"}
   ],
   "model-input": [
-    {"id": "Alice", "data": ["F",19,"Single","Professional"]},
-    {"id": "Gregory", "data": ["M",57,"Married","Trades"]},
-    {"id": "Joanna", "data": ["F",40, "Married", "Executive"]},
-    {"id": "Alexander", "data": ["M",36,"Single","Sales"]}
+    {"id": "Alice", "data": [1009530860,"F",84,2,114368,3852862,5,700259.0000,0.917808,335,2090.320000,3,"TX","Bachelors degree",0,"false"]}
   ],
   "model-prediction-mapping": {
     "0": ["Camping Equipment", "camping.svg"],

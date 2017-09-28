@@ -33,7 +33,16 @@ class Scoring extends Component {
     this.state = {
       deployments: []
     };
-    this.persons = modelInfo['model-input'];
+
+    //this.persons = modelInfo['model-input'];
+    this.persons = {
+      "id": "Alice",
+      "data": [1009530860,"F",0,2,114368,3852862,5,700259,0.917808,335,2090.32,3,"TX","Bachelors degree",0,"false"]
+    };
+    this.scoringData = {
+      "id": "",
+      "value": ""
+    };
     this.expectedSchema = modelInfo['model-schema'];
     this.handlePredicting = this.handlePredicting.bind(this);
     this.setScoringData = this.setScoringData.bind(this);
@@ -81,11 +90,19 @@ class Scoring extends Component {
     this.props.onAlert ? this.props.onAlert(message) : console.warn(message);
   }
 
+  setMyScoringdata(id,data){
+    console.log("My ID:"+id+"DATA:"+data);
+    this.scoringData.id=id;
+    this.scoringData.value=data;
+  }
+
   setScoringData (id, data) {
-    if (this.state.scoringData && this.state.scoringData.id === id) {
-      return;
-    }
+    console.log("ID:"+id+"DATA:"+data);
+    // if (this.state.scoringData && this.state.scoringData.id === id) {
+    //   return;
+    // }
     this.setState({
+
       scoringData: {id: id, value: data},
       scoringResult: null
     });
@@ -111,17 +128,24 @@ class Scoring extends Component {
 
   handlePredicting (e) {
     e.preventDefault();
+    this.persons.data[2]=parseInt(document.getElementById('testAge').value);
+    console.log(this.persons);
+    console.log(this.persons.data[2]);
+    this.setMyScoringdata(this.persons.id,this.persons.data);
+
+    console.log("Scoring data"+JSON.stringify(this.scoringData.value));
+    console.log("Scoring HREF"+JSON.stringify(this.scoringHref));
     if (this.state.scoringHref == null) {
       this._alert('Select a Deployment');
       return;
     }
-    if (this.state.scoringData == null) {
-      this._alert('Select a Customer');
-      return;
-    }
+    // if (this.state.scoringData == null) {
+    //   this._alert('Select a Customer');
+    //   return;
+    // }
 
     var data = {
-      scoringData: this.state.scoringData.value,
+      scoringData: JSON.stringify(this.scoringData.value),
       scoringHref: this.state.scoringHref.value
     };
     this.score(data, (error, result) => {
@@ -163,28 +187,50 @@ componentWillUnmount () {
   render () {
     let scoringResult = (this.state.scoringResult &&
       <ScoringResult
-        id={this.state.scoringData.id}
+        id={this.scoringData.id}
         deployment={this.state.scoringHref.id}
         probability={this.state.scoringResult.probability.values}
         onClose={this.reset}
       />);
     return (
-      <div>
-        <div className={styles.group}>
-          <h3>Select a Deployment</h3>
-          <Table data={this.state.deployments} onChoose={this.setScoringHref} className="center" selected={this.state.scoringHref && this.state.scoringHref.id}/>
+        <div>
+          <div className={styles.group}>
+            <h3>Select a Deployment</h3>
+            <Table data={this.state.deployments} onChoose={this.setScoringHref} className="center" selected={this.state.scoringHref && this.state.scoringHref.id}/>
+          </div>
+          <div className={styles.group}>
+            <div className="container">
+              <div className="row" >
+                <div className="col-md-4">
+                  <div className={styles.labels}><label>AGE</label><input id="testAge" class=".input-lg" placeholder="Customer Age" size="40"></input></div>
+                </div>
+                <div className="col-md-4">
+                  <div className={styles.labels}><label>SEX</label>
+                    <select placeholder="Select an Option" class="form-control">
+                      <option>M</option>
+                      <option>F</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                  <div className="col-md-4">
+                    <div className={styles.labels}><label>INCOME</label><input id="test" class=".input-lg" placeholder="Income" size="40"></input></div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className={styles.labels}><label>NEGATIVE TWEETS </label><input id="test" class=".input-lg" placeholder="negative Tweets" size="40"></input></div>
+                  </div>
+              </div>
+            </div>
+
+          </div>
+          <div className={styles.group}>
+            <div onClick={this.handlePredicting} className={styles.runButton + ' center'}>Generate Predictions</div>
+          </div>
+          <div className={styles.group}>
+            {scoringResult}
+          </div>
         </div>
-        <div className={styles.group}>
-          <h3>Select a Customer</h3>
-          <PersonsList persons={this.persons} onChoose={this.setScoringData} selected={this.state.scoringData && this.state.scoringData.id}/>
-        </div>
-        <div className={styles.group}>
-          <div onClick={this.handlePredicting} className={styles.runButton + ' center'}>Generate Predictions</div>
-        </div>
-        <div className={styles.group}>
-          {scoringResult}
-        </div>
-      </div>
     );
   }
 }
