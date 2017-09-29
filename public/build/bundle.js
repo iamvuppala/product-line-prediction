@@ -12466,7 +12466,7 @@ module.exports = validateDOMNesting;
 /* 86 */
 /***/ (function(module, exports) {
 
-module.exports = {"model-schema":[{"name":"CUST_ID","type":"integer"},{"name":"SEX","type":"string"},{"name":"AGE","type":"integer"},{"name":"EDUCATION","type":"integer"},{"name":"INVESTMENT","type":"integer"},{"name":"INCOME","type":"integer"},{"name":"ACTIVITY","type":"integer"},{"name":"YRLY_AMT","type":"decimal(31,6)"},{"name":"AVG_DAILY_TX","type":"decimal(31,6)"},{"name":"YRLY_TX","type":"integer"},{"name":"AVG_TX_AMT","type":"decimal(31,6)"},{"name":"NEGTWEETS","type":"integer"},{"name":"STATE","type":"string"},{"name":"EDUCATION_GROUP","type":"string"},{"name":"TWITTERID","type":"long"},{"name":"CHURN_LABEL","type":"string"}],"model-input":[{"id":"Joanna","data":[1009530863,"F",36,2,12345,138528,5,300259,0.517808,233,1090.32,1,"TX","Bachelors degree",0,"true"]},{"id":"alexander","data":[1009530861,"M",25,2,11436,38528,5,100259,0.317808,33,190.32,1,"CA","Associate degree",0,"true"]},{"id":"Alice","data":[1009530860,"F",84,2,114368,3852862,5,700259,0.917808,335,2090.32,3,"WA","Doctorate",0,"false"]},{"id":"Gregory","data":[1009530862,"M",54,2,224676,385286,5,400259,0.417808,123,590.32,1,"CT","High school graduate",0,"false"]},{"id":"Caroline","data":[1009530864,"F",45,2,123455,138528,5,700259,0.517808,533,3090.32,1,"NY","Masters degree",0,"true"]},{"id":"Xander","data":[1009530865,"M",92,2,121436,385283,5,200259,0.317808,733,1190.32,1,"TX","Masters degree",0,"true"]}],"model-prediction-mapping":{"0":["Stay","stay.png"],"1":["Leave","leave.png"]}}
+module.exports = {"model-schema":[{"name":"SEX","type":"string"},{"name":"AGE","type":"integer"},{"name":"EDUCATION","type":"integer"},{"name":"INVESTMENT","type":"integer"},{"name":"INCOME","type":"integer"},{"name":"ACTIVITY","type":"integer"},{"name":"YRLY_AMT","type":"decimal(31,6)"},{"name":"AVG_DAILY_TX","type":"decimal(31,6)"},{"name":"YRLY_TX","type":"integer"},{"name":"AVG_TX_AMT","type":"decimal(31,6)"},{"name":"NEGTWEETS","type":"integer"},{"name":"STATE","type":"string"},{"name":"EDUCATION_GROUP","type":"string"}],"model-input":[{"id":"Joanna","data":["F",36,2,12345,138528,5,300259,0.517808,233,1090.32,1,"TX","Bachelors degree"]},{"id":"alexander","data":["M",25,2,11436,38528,5,100259,0.317808,33,190.32,1,"CA","Associate degree"]},{"id":"Alice","data":["F",84,2,114368,3852862,5,700259,0.917808,335,2090.32,3,"WA","Doctorate"]},{"id":"Gregory","data":["M",54,2,224676,385286,5,400259,0.417808,123,590.32,1,"CT","High school graduate"]},{"id":"Caroline","data":["F",45,2,123455,138528,5,700259,0.517808,533,3090.32,1,"NY","Masters degree"]},{"id":"Xander","data":["M",92,2,121436,385283,5,200259,0.317808,733,1190.32,1,"TX","Masters degree"]}],"model-prediction-mapping":{"0":["Stay","stay.png"],"1":["Leave","leave.png"]}}
 
 /***/ }),
 /* 87 */
@@ -18672,9 +18672,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 function PersonCard(props) {
-  var gender = props.data[1];
-  var age = props.data[2];
-  var myState = props.data[12];
+  var gender = props.data[0];
+  var age = props.data[1];
+  var myState = props.data[11];
   var handleClick = function handleClick() {
     props.onChoose && props.onChoose(props.name, JSON.stringify(props.data));
   };
@@ -19028,7 +19028,7 @@ var Scoring = function (_Component) {
     _this.persons = modelInfo['model-input'];
     _this.mypersons = {
       "id": "Customer",
-      "data": [1234567890, "M", 0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0, "TX", "Bachelors degree", 0, "false"]
+      "data": ["M", 0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0, "TX", "Bachelors degree"]
     };
     _this.myScoringData = {
       "id": "",
@@ -19119,17 +19119,17 @@ var Scoring = function (_Component) {
         scoringHref: null,
         scoringData: null
       });
-      this.mypersons.data[1] = "M";
-      this.mypersons.data[2] = 0;
-      this.mypersons.data[5] = 0;
-      this.mypersons.data[11] = 0;
-      this.mypersons.data[12] = "TX";
+      this.mypersons.data[0] = "M";
+      this.mypersons.data[1] = 0;
+      this.mypersons.data[3] = 0;
       this.mypersons.data[4] = 0;
+      this.mypersons.data[10] = 0;
+      this.mypersons.data[11] = "TX";
       document.getElementById('testAge').value = "";
       document.getElementById('testSex').value = "";
+      document.getElementById('testInvest').value = "";
       document.getElementById('testIncome').value = "";
       document.getElementById('testTweets').value = "";
-      document.getElementById('testInvest').value = "";
       document.getElementById('testState').value = "";
     }
   }, {
@@ -19140,27 +19140,27 @@ var Scoring = function (_Component) {
       e.preventDefault();
       var testVar = false;
       if (document.getElementById('testAge').value) {
-        this.mypersons.data[2] = parseInt(document.getElementById('testAge').value);
+        this.mypersons.data[1] = parseInt(document.getElementById('testAge').value);
         testVar = true;
       }
       if (document.getElementById('testSex').value != "") {
-        this.mypersons.data[1] = document.getElementById('testSex').value;
+        this.mypersons.data[0] = document.getElementById('testSex').value;
         testVar = true;
       }
       if (document.getElementById('testIncome').value) {
-        this.mypersons.data[5] = parseInt(document.getElementById('testIncome').value);
+        this.mypersons.data[4] = parseInt(document.getElementById('testIncome').value);
         testVar = true;
       }
       if (document.getElementById('testTweets').value) {
-        this.mypersons.data[11] = parseInt(document.getElementById('testTweets').value);
+        this.mypersons.data[10] = parseInt(document.getElementById('testTweets').value);
         testVar = true;
       }
       if (document.getElementById('testState').value != "") {
-        this.mypersons.data[12] = document.getElementById('testState').value;
+        this.mypersons.data[11] = document.getElementById('testState').value;
         testVar = true;
       }
       if (document.getElementById('testInvest').value) {
-        this.mypersons.data[4] = parseInt(document.getElementById('testInvest').value);
+        this.mypersons.data[3] = parseInt(document.getElementById('testInvest').value);
         testVar = true;
       }
 
@@ -19632,7 +19632,7 @@ var Scoring = function (_Component) {
           { className: _style2.default.group },
           _react2.default.createElement(
             'h3',
-            null,
+            { style: { textAlign: 'center' } },
             '(Or) select a Customer'
           ),
           _react2.default.createElement(_PersonsList2.default, { persons: this.persons, onChoose: this.setScoringData, selected: this.state.scoringData && this.state.scoringData.id })

@@ -37,7 +37,7 @@ class Scoring extends Component {
     this.persons = modelInfo['model-input'];
     this.mypersons = {
       "id": "Customer",
-      "data": [1234567890,"M",0,0,0,0,0,0,0.0,0,0.0,0,"TX","Bachelors degree",0,"false"]
+      "data": [ "M",0,0,0,0,0,0,0.0,0,0.0,0,"TX","Bachelors degree" ]
     };
     this.myScoringData = {
       "id": "",
@@ -121,17 +121,17 @@ class Scoring extends Component {
       scoringHref: null,
       scoringData: null
     });
-    this.mypersons.data[1]="M"
-    this.mypersons.data[2]=0;
-    this.mypersons.data[5]=0;
-    this.mypersons.data[11]=0;
-    this.mypersons.data[12]="TX";
+    this.mypersons.data[0]="M"
+    this.mypersons.data[1]=0;
+    this.mypersons.data[3]=0;
     this.mypersons.data[4]=0;
+    this.mypersons.data[10]=0;
+    this.mypersons.data[11]="TX";
     document.getElementById('testAge').value = "";
     document.getElementById('testSex').value = "";
+    document.getElementById('testInvest').value = ""; 
     document.getElementById('testIncome').value = "";
     document.getElementById('testTweets').value = ""; 
-    document.getElementById('testInvest').value = ""; 
     document.getElementById('testState').value = ""; 
   }
 
@@ -139,27 +139,27 @@ class Scoring extends Component {
     e.preventDefault();
     var testVar=false;
     if(document.getElementById('testAge').value) {
-      this.mypersons.data[2]=parseInt(document.getElementById('testAge').value);
+      this.mypersons.data[1]=parseInt(document.getElementById('testAge').value);
       testVar=true;
     }
     if(document.getElementById('testSex').value != "" ) {
-      this.mypersons.data[1]=document.getElementById('testSex').value;
+      this.mypersons.data[0]=document.getElementById('testSex').value;
       testVar=true;
     }
     if(document.getElementById('testIncome').value) {
-      this.mypersons.data[5]=parseInt(document.getElementById('testIncome').value);
+      this.mypersons.data[4]=parseInt(document.getElementById('testIncome').value);
       testVar=true;
     }
     if(document.getElementById('testTweets').value) {
-      this.mypersons.data[11]=parseInt(document.getElementById('testTweets').value);
+      this.mypersons.data[10]=parseInt(document.getElementById('testTweets').value);
       testVar=true;
     }
     if(document.getElementById('testState').value != "" ) {
-      this.mypersons.data[12]=document.getElementById('testState').value;
+      this.mypersons.data[11]=document.getElementById('testState').value;
       testVar=true;
     }
     if(document.getElementById('testInvest').value) {
-      this.mypersons.data[4]=parseInt(document.getElementById('testInvest').value);
+      this.mypersons.data[3]=parseInt(document.getElementById('testInvest').value);
       testVar=true;
     }
 
@@ -336,7 +336,7 @@ componentWillUnmount () {
             </div>
           </div>
           <div className={styles.group}>
-          <h3>(Or) select a Customer</h3>
+          <h3 style={{textAlign: 'center'}}>(Or) select a Customer</h3>
             <PersonsList persons={this.persons} onChoose={this.setScoringData} selected={this.state.scoringData && this.state.scoringData.id}/>
           </div> 
           <div className={styles.group}>

@@ -20,9 +20,9 @@ import styles from './style.css';
 import classNames from 'classnames';
 
 function PersonCard (props) {
-  let gender = props.data[1];
-  let age = props.data[2];
-  let myState = props.data[12];
+  let gender = props.data[0];
+  let age = props.data[1];
+  let myState = props.data[11];
   let handleClick = function () {
     props.onChoose && props.onChoose(props.name, JSON.stringify(props.data));
   };
