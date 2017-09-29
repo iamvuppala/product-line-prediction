@@ -1,27 +1,33 @@
 body {
-	background-color: rgb(37,126,164);
-	background-size: cover;
-	font-family: Helvetica Neue, sans-serif;
+    background-color: rgb(37, 126, 164);
+    background-size: cover;
+    font-family: Helvetica Neue, sans-serif;
+    font-size: 12px;
 }
 
 h3 {
-	color: #FFFFFF;
-	font-family: Helvetica Neue Light, Helvetica Neue, sans-serif;
-	padding-bottom: 18px;
+    color: #FFFFFF;
+    font-family: Helvetica Neue Light, Helvetica Neue, sans-serif;
+    font-size: 20px;
 }
 
 .center {
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-	text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
 }
 
-.fa-4{
-	font-size:7em;
-	color: #FFFFFF;
+.fa-4 {
+    font-size: 5em;
+    color: #FFFFFF;
+}
+
+.fa-3 {
+    font-size: 1.5em;
+    color: #FFFFFF;
 }
 
 .markWithColor {
-	color: #F15D4E;
+    color: #F15D4E;
 }

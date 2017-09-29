@@ -53,22 +53,16 @@ class Result extends Component {
           <h1>{best.value}% {best.product[0]}</h1>
           <p className={styles['scoring-paragraph']}>Based
           on your selection of <span className={classNames(styles['bold'], 'markWithColor')}>{this.props.deployment}</span> and
-          your customer, it is predicted
-          that <span className={classNames(styles['bold'], 'markWithColor')}>{this.props.id}</span> is {best.value}% certain to
-          buy <span className={classNames(styles['bold'], 'markWithColor')}>{best.product[0]}</span>.
+          your information, it is predicted
+          that <span className={classNames(styles['bold'], 'markWithColor')}>{this.props.id}</span> is {best.value}% certain to 
+          <span className={classNames(styles['bold'], 'markWithColor')}> {best.product[0]}</span>.
           </p>
         </div>
-
-        <div className={styles['scoring-result-right']}>
-          <div>
-            <h1>Additional Recommendations</h1>
-            {probability.map(p => <p><span className={styles['bold']}>{p.value}%</span> {p.product[0]}</p>)}
-          </div>
+        <div className={styles['scoring-result-right']} style={{maxWidth: '100px', paddingLeft: '40px'}}>
           <div style={{display:'flex', alignItems: 'center'}}>
             <img src='/images/close.png' onClick={this.handleClose} style={{cursor: 'pointer'}}/>
           </div>
         </div>
-
       </div>
     );
   }

@@ -34,12 +34,12 @@ class Scoring extends Component {
       deployments: []
     };
 
-    //this.persons = modelInfo['model-input'];
-    this.persons = {
-      "id": "Alice",
-      "data": [1009530860,"F",0,2,114368,3852862,5,700259,0.917808,335,2090.32,3,"TX","Bachelors degree",0,"false"]
+    this.persons = modelInfo['model-input'];
+    this.mypersons = {
+      "id": "Customer",
+      "data": [1234567890,"M",0,0,0,0,0,0,0.0,0,0.0,0,"TX","Bachelors degree",0,"false"]
     };
-    this.scoringData = {
+    this.myScoringData = {
       "id": "",
       "value": ""
     };
@@ -91,18 +91,15 @@ class Scoring extends Component {
   }
 
   setMyScoringdata(id,data){
-    console.log("My ID:"+id+"DATA:"+data);
-    this.scoringData.id=id;
-    this.scoringData.value=data;
+    this.myScoringData.id=id;
+    this.myScoringData.value=data;
   }
 
   setScoringData (id, data) {
-    console.log("ID:"+id+"DATA:"+data);
-    // if (this.state.scoringData && this.state.scoringData.id === id) {
+    //if (this.state.scoringData && this.state.scoringData.id === id) {
     //   return;
-    // }
+    //}
     this.setState({
-
       scoringData: {id: id, value: data},
       scoringResult: null
     });
@@ -124,17 +121,63 @@ class Scoring extends Component {
       scoringHref: null,
       scoringData: null
     });
+    this.mypersons.data[1]="M"
+    this.mypersons.data[2]=0;
+    this.mypersons.data[5]=0;
+    this.mypersons.data[11]=0;
+    this.mypersons.data[12]="TX";
+    this.mypersons.data[4]=0;
+    document.getElementById('testAge').value = "";
+    document.getElementById('testSex').value = "";
+    document.getElementById('testIncome').value = "";
+    document.getElementById('testTweets').value = ""; 
+    document.getElementById('testInvest').value = ""; 
+    document.getElementById('testState').value = ""; 
   }
 
   handlePredicting (e) {
     e.preventDefault();
-    this.persons.data[2]=parseInt(document.getElementById('testAge').value);
-    console.log(this.persons);
-    console.log(this.persons.data[2]);
-    this.setMyScoringdata(this.persons.id,this.persons.data);
+    var testVar=false;
+    if(document.getElementById('testAge').value) {
+      this.mypersons.data[2]=parseInt(document.getElementById('testAge').value);
+      testVar=true;
+    }
+    if(document.getElementById('testSex').value != "" ) {
+      this.mypersons.data[1]=document.getElementById('testSex').value;
+      testVar=true;
+    }
+    if(document.getElementById('testIncome').value) {
+      this.mypersons.data[5]=parseInt(document.getElementById('testIncome').value);
+      testVar=true;
+    }
+    if(document.getElementById('testTweets').value) {
+      this.mypersons.data[11]=parseInt(document.getElementById('testTweets').value);
+      testVar=true;
+    }
+    if(document.getElementById('testState').value != "" ) {
+      this.mypersons.data[12]=document.getElementById('testState').value;
+      testVar=true;
+    }
+    if(document.getElementById('testInvest').value) {
+      this.mypersons.data[4]=parseInt(document.getElementById('testInvest').value);
+      testVar=true;
+    }
 
-    console.log("Scoring data"+JSON.stringify(this.scoringData.value));
-    console.log("Scoring HREF"+JSON.stringify(this.scoringHref));
+    if (testVar == false &&  this.state.scoringData == null) {
+      this._alert('Select an Option or select a customer');
+      return;
+    }
+
+    var tempScoringData = [];
+    if (testVar == true) {
+      this.setMyScoringdata(this.mypersons.id,this.mypersons.data);
+      tempScoringData = JSON.stringify(this.myScoringData.value)
+      this.setScoringData(this.myScoringData.id, tempScoringData)
+    } else if (!(this.state.scoringData == null)) {
+      tempScoringData = this.state.scoringData.value
+    }
+    
+    console.log(tempScoringData)
     if (this.state.scoringHref == null) {
       this._alert('Select a Deployment');
       return;
@@ -145,7 +188,7 @@ class Scoring extends Component {
     // }
 
     var data = {
-      scoringData: JSON.stringify(this.scoringData.value),
+      scoringData: tempScoringData,
       scoringHref: this.state.scoringHref.value
     };
     this.score(data, (error, result) => {
@@ -187,7 +230,7 @@ componentWillUnmount () {
   render () {
     let scoringResult = (this.state.scoringResult &&
       <ScoringResult
-        id={this.scoringData.id}
+        id={this.state.scoringData.id}
         deployment={this.state.scoringHref.id}
         probability={this.state.scoringResult.probability.values}
         onClose={this.reset}
@@ -195,35 +238,112 @@ componentWillUnmount () {
     return (
         <div>
           <div className={styles.group}>
-            <h3>Select a Deployment</h3>
-            <Table data={this.state.deployments} onChoose={this.setScoringHref} className="center" selected={this.state.scoringHref && this.state.scoringHref.id}/>
-          </div>
-          <div className={styles.group}>
-            <div className="container">
-              <div className="row" >
-                <div className="col-md-4">
-                  <div className={styles.labels}><label>AGE</label><input id="testAge" class=".input-lg" placeholder="Customer Age" size="40"></input></div>
+            <h3>Provide Customer Information</h3>
+            <div className="form-control" style={{fontSize : '1em', paddingTop: '15px', paddingBottom: '15px'}}>
+              <div className="row">
+              <div />
+                <div className="col-md-5">
+                  <div className={styles.labels}>
+                    <label>AGE : </label>
+                    <input id="testAge" class=".input-lg" placeholder="Customer Age"></input>
+                  </div>
                 </div>
-                <div className="col-md-4">
-                  <div className={styles.labels}><label>SEX</label>
-                    <select placeholder="Select an Option" class="form-control">
+                <div className="col-md-2">
+                  <div className={styles.labels}>
+                    <label>SEX : </label>
+                    <select placeholder="Select an Option" id="testSex" class=".input-lg">
+                      <option value="">Choose</option>
                       <option>M</option>
                       <option>F</option>
                     </select>
                   </div>
                 </div>
+                <div className="col-md-5">
+                    <div className={styles.labels}>
+                      <label>INVESTMENT : </label>
+                      <input id="testInvest" class=".input-lg" placeholder="Investment"></input>
+                    </div>
+                </div>
               </div>
+              <div className="row">&nbsp;</div>
               <div className="row">
-                  <div className="col-md-4">
-                    <div className={styles.labels}><label>INCOME</label><input id="test" class=".input-lg" placeholder="Income" size="40"></input></div>
+                  <div className="col-md-5">
+                    <div className={styles.labels}><label>INCOME : </label>
+                    <input id="testIncome" class=".input-lg" placeholder="Income"></input></div>
                   </div>
-                  <div className="col-md-4">
-                    <div className={styles.labels}><label>NEGATIVE TWEETS </label><input id="test" class=".input-lg" placeholder="negative Tweets" size="40"></input></div>
+                  <div className="col-md-2">
+                    <div className={styles.labels}><label>STATE : </label>
+                      <select placeholder="Select an Option" id="testState" class=".input-lg">
+                        <option value="">Choose</option>
+                        <option>AK</option>
+                        <option>AL</option>
+                        <option>AR</option>
+                        <option>AZ</option>
+                        <option>CA</option>
+                        <option>CO</option>
+                        <option>CT</option>
+                        <option>DC</option>
+                        <option>DE</option>
+                        <option>FL</option>
+                        <option>GA</option>
+                        <option>IA</option>
+                        <option>ID</option>
+                        <option>IL</option>
+                        <option>IN</option>
+                        <option>KS</option>
+                        <option>KY</option>
+                        <option>LA</option>
+                        <option>MA</option>
+                        <option>MD</option>
+                        <option>ME</option>
+                        <option>MI</option>
+                        <option>MN</option>
+                        <option>MO</option>
+                        <option>MS</option>
+                        <option>MT</option>
+                        <option>NC</option>
+                        <option>ND</option>
+                        <option>NE</option>
+                        <option>NH</option>
+                        <option>NJ</option>
+                        <option>NM</option>
+                        <option>NV</option>
+                        <option>NY</option>
+                        <option>OH</option>
+                        <option>OK</option>
+                        <option>OR</option>
+                        <option>PA</option>
+                        <option>RI</option>
+                        <option>SC</option>
+                        <option>SD</option>
+                        <option>TN</option>
+                        <option>TX</option>
+                        <option>UT</option>
+                        <option>VA</option>
+                        <option>VT</option>
+                        <option>WA</option>
+                        <option>WI</option>
+                        <option>WV</option>
+                        <option>WY</option>                        
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-5">
+                    <div className={styles.labels}><label>NEGATIVE TWEETS : </label>
+                    <input id="testTweets" class=".input-lg" placeholder="negative Tweets"></input></div>
                   </div>
               </div>
             </div>
-
           </div>
+          <div className={styles.group}>
+          <h3>(Or) select a Customer</h3>
+            <PersonsList persons={this.persons} onChoose={this.setScoringData} selected={this.state.scoringData && this.state.scoringData.id}/>
+          </div> 
+          <div className={styles.group}>
+            <h3>Select a Deployment</h3>
+            <Table data={this.state.deployments} onChoose={this.setScoringHref} className="center" selected={this.state.scoringHref && this.state.scoringHref.id}/>
+          </div>
+          <h3></h3>
           <div className={styles.group}>
             <div onClick={this.handlePredicting} className={styles.runButton + ' center'}>Generate Predictions</div>
           </div>
