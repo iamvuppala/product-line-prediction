@@ -19008,6 +19008,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 var modelInfo = __webpack_require__(86);
+var randomMaleFemale = ["M", "F"];
+var randomState = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"];
+var randomDegree = ["High school graduate", "Associate degree", "Bachelors degree", "Doctorate", "Masters degree"];
 
 var propTypes = {
   onAlert: _react.PropTypes.func
@@ -19028,7 +19031,7 @@ var Scoring = function (_Component) {
     _this.persons = modelInfo['model-input'];
     _this.mypersons = {
       "id": "Customer",
-      "data": ["M", 0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0, "TX", "Bachelors degree"]
+      "data": ["", 0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0, "", ""]
     };
     _this.myScoringData = {
       "id": "",
@@ -19119,12 +19122,7 @@ var Scoring = function (_Component) {
         scoringHref: null,
         scoringData: null
       });
-      this.mypersons.data[0] = "M";
-      this.mypersons.data[1] = 0;
-      this.mypersons.data[3] = 0;
-      this.mypersons.data[4] = 0;
-      this.mypersons.data[10] = 0;
-      this.mypersons.data[11] = "TX";
+      this.mypersons.data = ["", 0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0, "", ""];
       document.getElementById('testAge').value = "";
       document.getElementById('testSex').value = "";
       document.getElementById('testInvest').value = "";
@@ -19139,6 +19137,14 @@ var Scoring = function (_Component) {
 
       e.preventDefault();
       var testVar = false;
+
+      var randSex = Math.floor(Math.random() * 2);
+      this.mypersons.data[0] = randomMaleFemale[randSex];
+      var randState = Math.floor(Math.random() * 50);
+      this.mypersons.data[11] = randomState[randState];
+      var randDegree = Math.floor(Math.random() * 5);
+      this.mypersons.data[12] = randomDegree[randDegree];
+
       if (document.getElementById('testAge').value) {
         this.mypersons.data[1] = parseInt(document.getElementById('testAge').value);
         testVar = true;
@@ -19266,7 +19272,7 @@ var Scoring = function (_Component) {
                     null,
                     'AGE : '
                   ),
-                  _react2.default.createElement('input', { id: 'testAge', 'class': '.input-lg', placeholder: 'Customer Age' })
+                  _react2.default.createElement('input', { id: 'testAge', className: '.input-lg', placeholder: 'Customer Age' })
                 )
               ),
               _react2.default.createElement(
@@ -19282,7 +19288,7 @@ var Scoring = function (_Component) {
                   ),
                   _react2.default.createElement(
                     'select',
-                    { placeholder: 'Select an Option', id: 'testSex', 'class': '.input-lg' },
+                    { placeholder: 'Select an Option', id: 'testSex', className: '.input-lg' },
                     _react2.default.createElement(
                       'option',
                       { value: '' },
@@ -19312,7 +19318,7 @@ var Scoring = function (_Component) {
                     null,
                     'INVESTMENT : '
                   ),
-                  _react2.default.createElement('input', { id: 'testInvest', 'class': '.input-lg', placeholder: 'Investment' })
+                  _react2.default.createElement('input', { id: 'testInvest', className: '.input-lg', placeholder: 'Investment' })
                 )
               )
             ),
@@ -19335,7 +19341,7 @@ var Scoring = function (_Component) {
                     null,
                     'INCOME : '
                   ),
-                  _react2.default.createElement('input', { id: 'testIncome', 'class': '.input-lg', placeholder: 'Income' })
+                  _react2.default.createElement('input', { id: 'testIncome', className: '.input-lg', placeholder: 'Income' })
                 )
               ),
               _react2.default.createElement(
@@ -19351,7 +19357,7 @@ var Scoring = function (_Component) {
                   ),
                   _react2.default.createElement(
                     'select',
-                    { placeholder: 'Select an Option', id: 'testState', 'class': '.input-lg' },
+                    { placeholder: 'Select an Option', id: 'testState', className: '.input-lg' },
                     _react2.default.createElement(
                       'option',
                       { value: '' },
@@ -19621,7 +19627,7 @@ var Scoring = function (_Component) {
                     null,
                     'NEGATIVE TWEETS : '
                   ),
-                  _react2.default.createElement('input', { id: 'testTweets', 'class': '.input-lg', placeholder: 'negative Tweets' })
+                  _react2.default.createElement('input', { id: 'testTweets', className: '.input-lg', placeholder: 'negative Tweets' })
                 )
               )
             )
