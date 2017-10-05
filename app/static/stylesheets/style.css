@@ -1,4 +1,5 @@
 body {
+    background-image: url(../images/bg.jpg);
     background-color: rgb(37, 126, 164);
     background-size: cover;
     font-family: Helvetica Neue, sans-serif;

@@ -15,11 +15,11 @@
         { "name": "EDUCATION_GROUP", "type": "string" }
     ],
     "model-input": [
-        { "id": "Joanna", "data": ["F", 23, 2, 94881, 3217364, 1, 579084, 0.920548, 336, 1723.46, 5, "CA", "Bachelors degree"] },
-        { "id": "alexander", "data": ["M", 21, 5, 104192, 2010826, 2, 377970, 0.983562, 359, 1052.8401, 2, "CT", "Doctorate"] },
+        { "id": "Joanna", "data": ["F", 44, 2, 11492, 73914, 2, 19441, 0.691402556, 252, 69, 4, "CA", "High school graduate"] },
+        { "id": "alexander", "data": ["M", 54, 2, 124675, 285286, 5, 100259.0000, 0.517808, 310, 1590.320, 9, "MI", "High school graduate"] },
         { "id": "Alice", "data": ["F", 84, 2, 114368, 3852862, 5, 700259.0000, 0.917808, 335, 2090.320000, 3, "WA", "Doctorate"] },
-        { "id": "Gregory", "data": ["M", 54, 2, 124675, 285286, 5, 100259.0000, 0.517808, 310, 1590.320, 9, "MI", "High school graduate"] },
-        { "id": "Caroline", "data": ["F", 45, 2, 123455, 138528, 5, 700259.0000, 0.517808, 533, 3090.320, 1, "NY", "Masters degree"] },
+        { "id": "Gregory", "data": ["M", 50, 2, 15166, 111836, 3, 26278, 0.703718204, 257, 86, 8, "CT", "Masters degree"] },
+        { "id": "Caroline", "data": ["F", 48, 2, 15166, 111836, 3, 26278, 0.703718204, 257, 86, 11, "GA", "Doctorate"] },
         { "id": "Xander", "data": ["M", 54, 3, 20729, 194103, 9, 133423.4, 0.99726, 291, 344.891, 15, "MD", "Masters degree"] }
     ],
     "model-prediction-mapping": {
