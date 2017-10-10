@@ -19145,20 +19145,26 @@ var Scoring = function (_Component) {
       for (var i = 0; i < this.averageValues.length; i++) {
         if (this.averageValues[i].state_id == this.mypersons.data[11]) {
           for (var j = 0; j < this.averageValues[i].state_data.length; j++) {
-            if (j >= 0 && j <= 4) {
+            if (j == 1 || j >= 4 && j <= 8) {
               if (this.mypersons.data[j + 1] == 0) {
                 this.mypersons.data[j + 1] = parseInt(this.averageValues[i].state_data[j]);
               }
             }
-            if (j == 5 || j == 6 || j == 8) {
-              if (this.mypersons.data[j + 1] == 0) {
-                this.mypersons.data[j + 1] = parseFloat(this.averageValues[i].state_data[j]);
-              }
+
+            if (j == 0 && this.mypersons.data[j + 1] == 0 && parseInt(document.getElementById('testAge').value) != 0) {
+              this.mypersons.data[j + 1] = parseInt(this.averageValues[i].state_data[j]);
             }
-            if (j == 7 || j == 9) {
-              if (this.mypersons.data[j + 1] == 0) {
-                this.mypersons.data[j + 1] = parseInt(this.averageValues[i].state_data[j]);
-              }
+
+            if (j == 2 && this.mypersons.data[j + 1] == 0 && parseInt(document.getElementById('testInvest').value) != 0) {
+              this.mypersons.data[j + 1] = parseInt(this.averageValues[i].state_data[j]);
+            }
+
+            if (j == 3 && this.mypersons.data[j + 1] == 0 && parseInt(document.getElementById('testIncome').value) != 0) {
+              this.mypersons.data[j + 1] = parseInt(this.averageValues[i].state_data[j]);
+            }
+
+            if (j == 9 && this.mypersons.data[j + 1] == 0 && parseInt(document.getElementById('testTweets').value) != 0) {
+              this.mypersons.data[j + 1] = parseInt(this.averageValues[i].state_data[j]);
             }
           }
         }
@@ -19315,7 +19321,7 @@ var Scoring = function (_Component) {
                     'AGE : '
                   )
                 ),
-                _react2.default.createElement('input', { id: 'testAge', type: 'text', className: 'form-control', placeholder: 'Enter Age' })
+                _react2.default.createElement('input', { id: 'testAge', type: 'text', pattern: '[1-9][0-9]{0,2}', className: 'form-control', placeholder: 'Enter Age' })
               ),
               _react2.default.createElement(
                 'div',
@@ -19361,7 +19367,7 @@ var Scoring = function (_Component) {
                     'INVESTMENT : '
                   )
                 ),
-                _react2.default.createElement('input', { id: 'testInvest', type: 'text', className: 'form-control', placeholder: 'Enter Investment' })
+                _react2.default.createElement('input', { id: 'testInvest', type: 'text', pattern: '[0-9]+', className: 'form-control', placeholder: 'Enter Investment' })
               )
             ),
             _react2.default.createElement(
@@ -19389,7 +19395,7 @@ var Scoring = function (_Component) {
                     'INCOME : '
                   )
                 ),
-                _react2.default.createElement('input', { id: 'testIncome', type: 'text', className: 'form-control', placeholder: 'Enter Income' })
+                _react2.default.createElement('input', { id: 'testIncome', type: 'text', pattern: '[0-9]+', className: 'form-control', placeholder: 'Enter Income' })
               ),
               _react2.default.createElement(
                 'div',
@@ -19675,7 +19681,7 @@ var Scoring = function (_Component) {
                     'NEGATIVE TWEETS : '
                   )
                 ),
-                _react2.default.createElement('input', { id: 'testTweets', type: 'text', className: 'form-control', placeholder: 'Enter Negative Tweets' })
+                _react2.default.createElement('input', { id: 'testTweets', type: 'text', pattern: '[0-9]+', className: 'form-control', placeholder: 'Enter Negative Tweets' })
               )
             )
           )

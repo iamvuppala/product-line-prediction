@@ -139,23 +139,29 @@ class Scoring extends Component {
   fillRemainingValues() {
     for (var i = 0; i < this.averageValues.length; i++) {
       if (this.averageValues[i].state_id == this.mypersons.data[11]) {
-          for (var j=0;j<this.averageValues[i].state_data.length; j++) {
-            if (j>=0 && j<=4) {
-              if (this.mypersons.data[j+1] == 0) {
-                this.mypersons.data[j+1] = parseInt(this.averageValues[i].state_data[j]);
-              }
-            }
-            if (j==5 || j==6 || j==8) {
-              if (this.mypersons.data[j+1] == 0) {
-                this.mypersons.data[j+1] = parseFloat(this.averageValues[i].state_data[j]);
-              }
-            }
-            if (j==7||j==9) {
-              if (this.mypersons.data[j+1] == 0) {
-                this.mypersons.data[j+1] = parseInt(this.averageValues[i].state_data[j]);
-              }
+        for (var j=0;j<this.averageValues[i].state_data.length; j++) {
+          if (j==1 || ( j>=4 && j<=8)) {
+            if (this.mypersons.data[j+1] == 0) {
+              this.mypersons.data[j+1] = parseInt(this.averageValues[i].state_data[j]);
             }
           }
+
+          if (j==0 && this.mypersons.data[j+1] == 0 && (parseInt(document.getElementById('testAge').value) != 0)) {
+              this.mypersons.data[j+1] = parseInt(this.averageValues[i].state_data[j]);
+          }
+
+          if (j==2 && this.mypersons.data[j+1] == 0 && (parseInt(document.getElementById('testInvest').value) != 0)) {
+            this.mypersons.data[j+1] = parseInt(this.averageValues[i].state_data[j]);
+          }
+
+          if (j==3 && this.mypersons.data[j+1] == 0 && (parseInt(document.getElementById('testIncome').value) != 0)) {
+            this.mypersons.data[j+1] = parseInt(this.averageValues[i].state_data[j]);
+          }
+
+          if (j==9 && this.mypersons.data[j+1] == 0 && (parseInt(document.getElementById('testTweets').value) !=0 )) {
+              this.mypersons.data[j+1] = parseInt(this.averageValues[i].state_data[j]);
+          }
+        }
       }
     }
   }
@@ -281,7 +287,7 @@ componentWillUnmount () {
                 <div className="col-md-2"> </div>
                 <div className="input-group col-md-3">
                   <span className="input-group-addon"><b>AGE : </b></span>
-                  <input id="testAge" type="text" className="form-control" placeholder="Enter Age"/>
+                  <input id="testAge" type="text" pattern="[1-9][0-9]{0,2}" className="form-control" placeholder="Enter Age"/>
                 </div>
                 <div className="input-group col-md-2">
                   <span className="input-group-addon"><b>SEX : </b></span>
@@ -293,7 +299,7 @@ componentWillUnmount () {
                 </div>
                 <div className="input-group col-md-3">
                   <span className="input-group-addon"><b>INVESTMENT : </b></span>
-                  <input id="testInvest" type="text" className="form-control" placeholder="Enter Investment"></input>
+                  <input id="testInvest" type="text" pattern="[0-9]+" className="form-control" placeholder="Enter Investment"></input>
                 </div>
               </div>
               <div className="row">&nbsp;</div>
@@ -301,7 +307,7 @@ componentWillUnmount () {
                 <div className="col-md-2"> </div>
                 <div className="input-group col-md-3">
                   <span className="input-group-addon"><b>INCOME : </b></span>
-                  <input id="testIncome" type="text" className="form-control" placeholder="Enter Income"/>
+                  <input id="testIncome" type="text" pattern="[0-9]+" className="form-control" placeholder="Enter Income"/>
                 </div>
                 <div className="input-group col-md-2">
                   <span className="input-group-addon"><b>STATE : </b></span>
@@ -361,7 +367,7 @@ componentWillUnmount () {
                 </div>
                 <div className="input-group col-md-3">
                   <span className="input-group-addon"><b>NEGATIVE TWEETS : </b></span>
-                  <input id="testTweets" type="text" className="form-control" placeholder="Enter Negative Tweets"></input>
+                  <input id="testTweets" type="text" pattern="[0-9]+" className="form-control" placeholder="Enter Negative Tweets"></input>
                 </div>
              </div>
             </div>
