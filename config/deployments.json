@@ -1,0 +1,14 @@
+{
+    "deployments": [{
+        "name": "bankpredictv1",
+        "status": "ACTIVE",
+        "createdAt": "2017-10-06 12:34:09",
+        "scoringHref": "https://9.37.250.143/v2/scoring/online/05fb00b6-80e6-46d0-97ee-e3b98b59ccab",
+        "id": 1,
+        "model": {
+            "author": "undefined",
+            "runtimeEnvironment": "spark-2.0",
+            "name": "bankpredictv1"
+        }
+    }]
+}

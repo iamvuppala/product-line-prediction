@@ -17,7 +17,7 @@ const request = require('request');
 const log4js = require('../utils/log4js-logger-util');
 const logger = log4js.getLogger('server/service-client');
 const debug = require('debug')('sample');
-const TOKEN_PATH = '/v3/identity/token';
+const TOKEN_PATH = '/v2/identity/token';
 
 const modelInfo = require('../config/model.json');
 const schema = modelInfo['model-schema'].map(obj => obj.name);
@@ -41,7 +41,7 @@ function getTokenFromTokenEndoint(tokenEndpoint, user, password) {
             } else {
                 switch (res.statusCode) {
                     case 200:
-                        resolve(JSON.parse(res.body).token);
+                        resolve(JSON.parse(res.body).accessToken);
                         break;
                     default:
                         reject(new Error(`Token Endpoint returned ${res.statusCode}.
@@ -86,9 +86,10 @@ ServiceClient.prototype = {
         let options = {
             method: 'POST',
             uri: href,
+            rejectUnauthorized: false,
             headers: { 'content-type': 'application/json' }
         };
-        let body = JSON.stringify({ values: [data], fields: schema });
+        let body = JSON.stringify({ records: [data], fields: schema });
         debug(body);
         options.body = body;
 
@@ -96,7 +97,7 @@ ServiceClient.prototype = {
             if (!error && response.statusCode === 200) {
                 var scoreResponse = JSON.parse(body);
                 var index = scoreResponse.fields.indexOf('probability');
-                scoreResponse['probability'] = { values: scoreResponse.values[0][index] };
+                scoreResponse['probability'] = { values: scoreResponse.records[0][index] };
 
                 logger.info('getScore()', `successfully finished scoring for scoringHref ${href}`);
                 callback && callback(null, scoreResponse);

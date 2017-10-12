@@ -26,6 +26,7 @@ const randomMaleFemale = ["M","F"];
 const randomState = ["AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"];
 const randomDegree = ["High school graduate", "Associate degree", "Bachelors degree", "Doctorate", "Masters degree"];
 const averageInfo = require('../../../config/average-values.json');
+const deploymentsInfo = require('../../../config/deployments.json');
 
 const propTypes = {
   onAlert: PropTypes.func
@@ -54,42 +55,16 @@ class Scoring extends Component {
     this.setScoringHref = this.setScoringHref.bind(this);
     this.reset = this.reset.bind(this);
     this.fillRemainingValues = this.fillRemainingValues.bind(this);
+    this.myDeployments = deploymentsInfo['deployments'];
   }
 
   componentWillMount () {
     let ctx = this;
-    this.serverRequest = $.get('/env/deployments', function (result) {
-      // validate deployment's model schema
-      result = result.map(d => {
-        let matches = false;
-        let schema = d.model.input_data_schema.fields;
-        if (schema.length === ctx.expectedSchema.length) {
-          matches = true;
-          for (let i = 0; i < schema.length; i++) {
-            if ((schema[i].type !== ctx.expectedSchema[i].type) || (schema[i].name !== ctx.expectedSchema[i].name)) {
-              matches = false;
-              break;
-            }
-          }
-        }
-        d.disabled = !matches;
-        d.createdAt = new Date(d.createdAt).toLocaleString();
-        return d;
-      });
-      ctx.setState({
-        deployments: result
-      });
+    // Get Deployments from File.
+    let results = this.myDeployments;
+    ctx.setState({
+      deployments: results
     })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-      console.log(errorThrown);
-      let err = errorThrown;
-      if (jqXHR.responseJSON) {
-        err = jqXHR.responseJSON.errors;
-      } else if (jqXHR.responseText) {
-        err = jqXHR.responseText;
-      }
-      ctx._alert(err);
-    });
   }
 
   _alert (message) {
@@ -220,7 +195,7 @@ class Scoring extends Component {
       tempScoringData = this.state.scoringData.value
     }
     
-    console.log(tempScoringData)
+    console.log(tempScoringData);
     if (this.state.scoringHref == null) {
       this._alert('Select a Deployment');
       return;
@@ -229,7 +204,7 @@ class Scoring extends Component {
     //   this._alert('Select a Customer');
     //   return;
     // }
-
+    console.log(this.state.scoringHref.value);
     var data = {
       scoringData: tempScoringData,
       scoringHref: this.state.scoringHref.value
