@@ -1,14 +1,38 @@
 {
     "deployments": [{
-        "name": "bankpredictv1",
-        "status": "ACTIVE",
-        "createdAt": "2017-10-19 12:07:47",
-        "scoringHref": "https://9.30.123.134/v2/scoring/online/61c0881f-0f9b-4e22-953a-d841df90a166",
-        "id": 1,
-        "model": {
-            "author": "undefined",
-            "runtimeEnvironment": "spark-2.0",
-            "name": "bankpredictv1"
+            "name": "bankpredictv1",
+            "status": "ACTIVE",
+            "createdAt": "2017-10-19 12:07:47",
+            "scoringHref": "https://9.30.123.134/v2/scoring/online/61c0881f-0f9b-4e22-953a-d841df90a166",
+            "id": 1,
+            "model": {
+                "author": "undefined",
+                "runtimeEnvironment": "spark-2.0",
+                "name": "bankpredictv1"
+            }
+        }, {
+            "name": "bankpredictv2",
+            "status": "ACTIVE",
+            "createdAt": "2017-10-19 14:43:28",
+            "scoringHref": "https://9.30.123.134/v2/scoring/online/b28572ad-3971-4f47-9310-5d0d0c029e4f",
+            "id": 2,
+            "model": {
+                "author": "undefined",
+                "runtimeEnvironment": "spark-2.0",
+                "name": "bankpredictv2"
+            }
+        },
+        {
+            "name": "bankpredictv3",
+            "status": "ACTIVE",
+            "createdAt": "2017-10-19 14:43:45",
+            "scoringHref": "https://9.30.123.134/v2/scoring/online/b28572ad-3971-4f47-9310-5d0d0c029e4f",
+            "id": 3,
+            "model": {
+                "author": "undefined",
+                "runtimeEnvironment": "spark-2.0",
+                "name": "bankpredictv3"
+            }
         }
-    }]
+    ]
 }
