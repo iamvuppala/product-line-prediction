@@ -2,8 +2,8 @@
     "deployments": [{
         "name": "bankpredictv1",
         "status": "ACTIVE",
-        "createdAt": "2017-10-06 12:34:09",
-        "scoringHref": "https://9.37.250.143/v2/scoring/online/05fb00b6-80e6-46d0-97ee-e3b98b59ccab",
+        "createdAt": "2017-10-19 12:07:47",
+        "scoringHref": "https://9.30.123.134/v2/scoring/online/61c0881f-0f9b-4e22-953a-d841df90a166",
         "id": 1,
         "model": {
             "author": "undefined",

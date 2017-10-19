@@ -18119,7 +18119,7 @@ module.exports = {"model-average-values":[{"state_id":"AK","state_data":[51,2,95
 /* 157 */
 /***/ (function(module, exports) {
 
-module.exports = {"deployments":[{"name":"bankpredictv1","status":"ACTIVE","createdAt":"2017-10-06 12:34:09","scoringHref":"https://9.37.250.143/v2/scoring/online/05fb00b6-80e6-46d0-97ee-e3b98b59ccab","model":{"author":"undefined","runtimeEnvironment":"spark-2.0","name":"bankpredictv1"}}]}
+module.exports = {"deployments":[{"name":"bankpredictv1","status":"ACTIVE","createdAt":"2017-10-19 12:07:47","scoringHref":"https://9.30.123.134/v2/scoring/online/61c0881f-0f9b-4e22-953a-d841df90a166","id":1,"model":{"author":"undefined","runtimeEnvironment":"spark-2.0","name":"bankpredictv1"}}]}
 
 /***/ }),
 /* 158 */
@@ -19066,42 +19066,11 @@ var Scoring = function (_Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       var ctx = this;
+      // Get Deployments from File.
       var results = this.myDeployments;
       ctx.setState({
         deployments: results
       });
-      // this.serverRequest = $.get('/env/deployments', function (result) {
-      //   // validate deployment's model schema
-      //   result = result.map(d => {
-      //     let matches = false;
-      //     let schema = d.model.input_data_schema.fields;
-      //     if (schema.length === ctx.expectedSchema.length) {
-      //       matches = true;
-      //       for (let i = 0; i < schema.length; i++) {
-      //         if ((schema[i].type !== ctx.expectedSchema[i].type) || (schema[i].name !== ctx.expectedSchema[i].name)) {
-      //           matches = false;
-      //           break;
-      //         }
-      //       }
-      //     }
-      //     d.disabled = !matches;
-      //     d.createdAt = new Date(d.createdAt).toLocaleString();
-      //     return d;
-      //   });
-      //   ctx.setState({
-      //     deployments: result
-      //   });
-      // })
-      // .fail(function (jqXHR, textStatus, errorThrown) {
-      //   console.log(errorThrown);
-      //   let err = errorThrown;
-      //   if (jqXHR.responseJSON) {
-      //     err = jqXHR.responseJSON.errors;
-      //   } else if (jqXHR.responseText) {
-      //     err = jqXHR.responseText;
-      //   }
-      //   ctx._alert(err);
-      // });
     }
   }, {
     key: '_alert',

@@ -1,11 +1,11 @@
 {
     "pm-20": [{
         "credentials": {
-            "url": "https://9.37.250.143",
+            "url": "https://9.30.123.134",
             "access_key": "p-0731edcf4eac873c6892339b1953ff9f9afcbd14",
-            "username": "hope",
-            "password": "hope",
-            "instance_id": "05fb00b6-80e6-46d0-97ee-e3b98b59ccab"
+            "username": "admin",
+            "password": "passw0rd",
+            "instance_id": "61c0881f-0f9b-4e22-953a-d841df90a166"
         }
     }]
 }
