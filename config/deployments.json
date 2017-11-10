@@ -1,0 +1,14 @@
+{
+    "deployments": [{
+        "name": "SampleDeployment",
+        "status": "ACTIVE",
+        "createdAt": "2017-11-10 12:22:35",
+        "scoringHref": "<Scoring_Href_URL>",
+        "id": 1,
+        "model": {
+            "author": "undefined",
+            "runtimeEnvironment": "spark-2.0",
+            "name": "SampleModel"
+        }
+    }]
+}
